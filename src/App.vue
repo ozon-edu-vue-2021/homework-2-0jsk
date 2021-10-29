@@ -1,28 +1,26 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <tree-presenter :margin="20" :root="modules" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { Catalog } from '@/services/catalog';
+import Presenter from '@/components/Tree/Presenter';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  components: { TreePresenter: Presenter },
+  data() {
+    return {
+      modules: Catalog.getMarkedPath(),
+    };
+  },
+};
 </script>
 
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
