@@ -77,7 +77,7 @@ export default {
         this.isExpanded = !this.isExpanded;
       }
 
-      if (this.type !== 'directory') {
+      if (this.type !== 'directory' || this.isSelected) {
         this.select();
       }
     },
