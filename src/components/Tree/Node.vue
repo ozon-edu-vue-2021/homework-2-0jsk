@@ -1,25 +1,25 @@
 <template>
   <section>
-      <div :class="['node', { clickable: isClickable, selected: isSelected }]"
-           :style="{ marginLeft: `${margin * depth}px` }"
-           @click.exact="toggle(title)"
-           @click.shift="select"
-           @keyup.enter.exact="toggle(title)"
-           @keyup.shift.enter="select"
-           @keyup.space="toggle(title)"
-           ref="node"
-           tabindex="0">
-        <img :src="iconSource" :alt="type" class="icon">
-        <span :class="['title', { link: isLink }]">{{ title }}</span>
-      </div>
-      <div v-for="item in contents" :key="item.name">
-        <tree-node v-if="isExpanded"
-                   :contents="item.contents"
-                   :type="item.type"
-                   :title="item.name"
-                   :margin="margin"
-                   :depth="depth + 1" />
-      </div>
+    <div :class="['node', { clickable: isClickable, selected: isSelected }]"
+         :style="{ marginLeft: `${margin * depth}px` }"
+         @click.exact="toggle(title)"
+         @click.shift="select"
+         @keyup.enter.exact="toggle(title)"
+         @keyup.shift.enter="select"
+         @keyup.space="toggle(title)"
+         ref="node"
+         tabindex="0">
+      <img :src="iconSource" :alt="type" class="icon">
+      <span :class="['title', { link: isLink }]">{{ title }}</span>
+    </div>
+    <div v-for="item in contents" :key="item.name">
+      <tree-node v-if="isExpanded"
+                 :contents="item.contents"
+                 :type="item.type"
+                 :title="item.path"
+                 :margin="margin"
+                 :depth="depth + 1" />
+    </div>
   </section>
 </template>
 

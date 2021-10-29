@@ -1,10 +1,10 @@
 <template>
-    <tree-node :key="root.name"
-               :depth="0"
-               :margin="margin"
-               :title="root.name"
-               :contents="root.contents"
-               :type="root.type" />
+  <tree-node :key="root.name"
+             :depth="0"
+             :margin="margin"
+             :title="root.path"
+             :contents="root.contents"
+             :type="root.type" />
 </template>
 
 <script>
@@ -21,16 +21,6 @@ export default {
     root: {
       type: Object,
       required: true,
-    },
-  },
-  data() {
-    return {
-      selectedItems: [],
-    };
-  },
-  methods: {
-    toggleSelect() {
-      return Boolean(this.selected.includes());
     },
   },
 };

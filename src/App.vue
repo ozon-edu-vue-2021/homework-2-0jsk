@@ -13,10 +13,8 @@ export default {
   components: { TreePresenter: Presenter },
   data() {
     return {
-      modules: Catalog.get(),
+      modules: Catalog.getMarkedPath(),
     };
-  },
-  updated() {
   },
 };
 </script>
