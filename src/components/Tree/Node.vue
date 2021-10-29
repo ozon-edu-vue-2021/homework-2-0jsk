@@ -2,7 +2,8 @@
   <section>
       <div :class="['node', { clickable: isClickable, selected: isSelected }]"
            :style="{ marginLeft: `${margin * depth}px` }"
-           @click="toggle(title)"
+           @click.exact="toggle(title)"
+           @click.shift="select"
            @keyup.enter.exact="toggle(title)"
            @keyup.shift.enter="select"
            @keyup.space="toggle(title)"
