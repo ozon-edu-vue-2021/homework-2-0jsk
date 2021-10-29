@@ -17,7 +17,6 @@ export default {
     };
   },
   updated() {
-    console.log({ m: this.modules });
   },
 };
 </script>

@@ -1,8 +1,13 @@
 <template>
-  <div>
-      <div :class="['node', { clickable: isClickable }]"
+  <section>
+      <div :class="['node', { clickable: isClickable, selected: isSelected }]"
            :style="{ marginLeft: `${margin * depth}px` }"
-           @click="isClickable && toggle(title)">
+           @click="toggle(title)"
+           @keyup.enter.exact="toggle(title)"
+           @keyup.shift.enter="select"
+           @keyup.space="toggle(title)"
+           ref="node"
+           tabindex="0">
         <img :src="iconSource" :alt="type" class="icon">
         <span :class="['title', { link: isLink }]">{{ title }}</span>
       </div>
@@ -14,7 +19,7 @@
                    :margin="margin"
                    :depth="depth + 1" />
       </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -43,15 +48,11 @@ export default {
       type: Array,
       required: false,
     },
-    selected: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
   },
   data() {
     return {
       isExpanded: false,
+      isSelected: false,
     };
   },
   computed: {
@@ -66,8 +67,19 @@ export default {
     },
   },
   methods: {
+    select() {
+      this.isSelected = !this.isSelected;
+    },
     toggle() {
-      this.isExpanded = !this.isExpanded;
+      this.$refs.node.focus();
+
+      if (this.isClickable) {
+        this.isExpanded = !this.isExpanded;
+      }
+
+      if (this.type !== 'directory') {
+        this.select();
+      }
     },
   },
 };
@@ -90,6 +102,10 @@ export default {
   & .title {
     font-size: 16px;
     margin-left: 4px;
+  }
+
+  &.selected {
+    background-color: colors.$node-bg;
   }
 
   &.clickable {
